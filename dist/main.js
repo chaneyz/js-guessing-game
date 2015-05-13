@@ -1,7 +1,7 @@
 function* guessingGame() {
 
 var complete = false;
-var answer = parseInt(null);
+var answer = null;
 var numRandom = Math.floor(Math.random() * 100);
 
 yield game.say('Welcome to the number guessing game!');
@@ -14,19 +14,18 @@ console.log(numRandom);
 
 do {
 	answer = yield game.ask('Choose your answer!');
+	var numAnswer = parseInt(answer, 10);
 	console.log(answer);
-	if(answer === numRandom) {
+	if (numAnswer === numRandom) {
 		complete = true;
-	}
-} 
-
-while(!complete)
-//while(complete === false)
-
-if(answer === numRandom) {
-	yield game.say('Sorry, incorrect! Let\'s play again!');
 }
-else {
+	else {
+	yield game.say('Sorry, incorrect. Let\'s play again!');
+}
+
+} while(!complete)
+
+if (numAnswer === numRandom) {
 	yield game.say('Congratulations! You guessed correctly!');
 }
 
